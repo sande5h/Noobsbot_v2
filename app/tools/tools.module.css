@@ -1,0 +1,525 @@
+/* Tools — "workbench" light theme.
+   Renders inside the white .screen panel, beneath the global nav. */
+
+.page {
+  min-height: 100%;
+  padding: 104px clamp(20px, 5vw, 56px) 64px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.logoBlock {
+  min-width: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.logoTitle {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* ── Tab nav ── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.tabActive,
+.tabActive:hover {
+  color: #fff;
+  background: #4945ff;
+  border-color: #4945ff;
+}
+
+/* ── Calculator section ── */
+.calcHeader {
+  margin-bottom: 24px;
+}
+
+.calcTitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.calcDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 70ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: #f6f8fb;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.panelLabel {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+/* ── Fields ── */
+.field {
+  margin-bottom: 14px;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.input,
+.unitSelect {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus,
+.unitSelect:focus {
+  outline: none;
+  border-color: var(--link);
+  box-shadow: 0 0 0 3px rgba(46, 155, 246, 0.12);
+}
+
+/* hide the native number spinner (up/down arrows) */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* value box + × clear button */
+.numWrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.inputRow .numWrap {
+  flex: 1;
+}
+
+.numWrap .input {
+  width: 100%;
+  padding-right: 32px;
+}
+
+.clearX {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(15, 27, 97, 0.08);
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.clearX:hover {
+  background: #e5484d;
+  color: #fff;
+}
+
+.input:disabled,
+.unitSelect:disabled {
+  background: rgba(15, 27, 97, 0.05);
+  color: var(--ink-faint);
+  border-color: var(--hairline);
+  cursor: not-allowed;
+}
+
+/* the wrapper carries the tooltip; show the not-allowed cursor over the gap too */
+.inputRow[title] {
+  cursor: not-allowed;
+}
+
+.inputReadonly {
+  background: rgba(15, 27, 97, 0.04);
+  color: var(--ink-soft);
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.inputRow .input {
+  flex: 1;
+}
+
+.unitSelect {
+  width: auto;
+  min-width: 76px;
+  cursor: pointer;
+}
+
+.btn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  padding: 10px 18px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+  color: #fff;
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ── Notes ── */
+.note {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(15, 27, 97, 0.03);
+  border-left: 2px solid var(--hairline-strong);
+  border-radius: 0 8px 8px 0;
+}
+
+.noteInfo {
+  border-left-color: var(--link);
+}
+
+.noteSmall {
+  font-size: 0.72rem;
+  padding: 6px 0;
+  margin-top: 6px;
+  background: none;
+  border: 0;
+}
+
+/* ── Resistor / diagrams ── */
+.bandSelectors {
+  display: flex;
+  flex-direction: column;
+}
+
+.resistorWrap,
+.diagram {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+/* resistor top row: band-count + drawing + readouts */
+.resistorTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.matrixHeader {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.bandCount {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.countBtn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.countBtn:hover {
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.countBtnActive,
+.countBtnActive:hover {
+  color: #fff;
+  background: #4945ff;
+  border-color: #4945ff;
+}
+
+.resistorOut {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.resistorOut .output {
+  flex: 1;
+}
+
+/* color × band matrix selector */
+.matrix {
+  display: grid;
+  gap: 6px;
+  align-items: center;
+}
+
+.matrixHead {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.colorLabel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.swatchDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(15, 27, 97, 0.2);
+  flex-shrink: 0;
+}
+
+.cellBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 28px;
+  padding: 0 4px;
+  border: 1px solid rgba(15, 27, 97, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 0.1s ease, box-shadow 0.12s ease;
+}
+
+.cellBtn:hover {
+  transform: translateY(-1px);
+}
+
+.cellSelected {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--link);
+}
+
+.cellEmpty {
+  height: 28px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(15, 27, 97, 0.05) 5px,
+    rgba(15, 27, 97, 0.05) 6px
+  );
+}
+
+/* ── Outputs ── */
+.output {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.outputLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+.outputValue {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.outputRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.outputRow:last-child {
+  border-bottom: 0;
+}
+
+.rowKey {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.rowVal {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* a computed (solved-for) output, highlighted to distinguish it from inputs */
+.rowHot {
+  color: var(--link);
+  font-weight: 600;
+}
+
+.accentStrong {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--link);
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.tagRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 3px 10px;
+}

@@ -1,0 +1,471 @@
+/* logo + separator + MENU grouped at top-left (robbowen.digital style) */
+.nav {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  display: block;
+}
+
+/* text wordmark in place of the logo image */
+.wordmark {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #0f1b61;
+}
+
+.wordmarkAccent {
+  color: #2e9bf6;
+}
+
+.sep {
+  width: 1px;
+  height: 26px;
+  margin: 0 0 8px 16px;
+  background: #919795;
+}
+
+.menuBtn {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  padding: 0;
+  transition: letter-spacing 0.25s ease;
+}
+
+.menuBtn:hover {
+  letter-spacing: 6px;
+}
+
+/* "Build" trigger mirrored on the top-right, same treatment as the menu */
+.tagline {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #000;
+  transition: letter-spacing 0.25s ease;
+}
+
+.tagline:hover {
+  letter-spacing: 6px;
+}
+
+.taglineIcon {
+  display: block;
+  margin-bottom: 4px;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.25s ease;
+}
+
+.tagline:hover .taglineIcon {
+  transform: scale(1.12);
+}
+
+/* masked label that swipes right when toggling Menu <-> Close */
+.menuMask {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 80px;
+  height: 1.5rem;
+  vertical-align: middle;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.labelMenu {
+  transform: translateX(0);
+}
+
+.labelClose {
+  transform: translateX(-200%);
+}
+
+.menuMask.open .labelMenu {
+  transform: translateX(200%);
+}
+
+.menuMask.open .labelClose {
+  transform: translateX(0);
+}
+
+/* full-screen flyout with a slide-down mask */
+.flyout {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.flyout.open {
+  pointer-events: auto;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  background: #aadcec;
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.flyout.open .mask {
+  transform: none;
+}
+
+/* the contact flyout uses a warm cream backdrop */
+.maskContact {
+  background: #fdf9d4;
+}
+
+.flyoutInner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 150px 55px 80px 65px;
+  overflow: auto;
+}
+
+/* menu links cascade in one-by-one after the mask settles */
+.primary li {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.flyout.open .primary li {
+  opacity: 1;
+  transform: none;
+}
+
+.flyout.open .primary li:nth-child(1) {
+  transition-delay: 0.55s;
+}
+.flyout.open .primary li:nth-child(2) {
+  transition-delay: 0.75s;
+}
+.flyout.open .primary li:nth-child(3) {
+  transition-delay: 0.95s;
+}
+.flyout.open .primary li:nth-child(4) {
+  transition-delay: 1.15s;
+}
+.flyout.open .primary li:nth-child(5) {
+  transition-delay: 1.35s;
+}
+.flyout.open .primary li:nth-child(6) {
+  transition-delay: 1.55s;
+}
+
+/* big bold primary links */
+.primary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.primary li {
+  margin: 4px 0;
+}
+
+.primary a {
+  display: inline-block;
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0f1b61;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.primary a:hover {
+  color: #2e9bf6;
+  transform: translateX(10px);
+}
+
+.summary {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.9rem;
+  color: rgba(15, 27, 97, 0.5);
+}
+
+/* ---- contact / quote-request flyout ---- */
+/* container stays put; its children cascade in one-by-one after the mask */
+.contactInner {
+  justify-content: flex-start;
+  padding: 120px 8vw 80px;
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* hidden until the panel opens, then revealed in sequence */
+.contactInfo > *,
+.contactForm > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.flyout.open .contactInfo > *,
+.flyout.open .contactForm > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* stagger: mask finishes (~0.6s), then items fade up in order */
+.flyout.open .contactInfo > *:nth-child(1) {
+  transition-delay: 0.55s;
+}
+.flyout.open .contactInfo > *:nth-child(2) {
+  transition-delay: 0.75s;
+}
+.flyout.open .contactInfo > *:nth-child(3) {
+  transition-delay: 0.95s;
+}
+.flyout.open .contactForm > *:nth-child(1) {
+  transition-delay: 0.65s;
+}
+.flyout.open .contactForm > *:nth-child(2) {
+  transition-delay: 0.85s;
+}
+.flyout.open .contactForm > *:nth-child(3) {
+  transition-delay: 1.05s;
+}
+.flyout.open .contactForm > *:nth-child(4) {
+  transition-delay: 1.25s;
+}
+.flyout.open .contactForm > *:nth-child(5) {
+  transition-delay: 1.45s;
+}
+.flyout.open .contactForm > *:nth-child(6) {
+  transition-delay: 1.65s;
+}
+.flyout.open .contactForm > *:nth-child(7) {
+  transition-delay: 1.85s;
+}
+.flyout.open .contactForm > *:nth-child(8) {
+  transition-delay: 2.05s;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  color: #1a1a14;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactTitle {
+  margin: 0 0 24px;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.contactEmail {
+  font-size: 1.1rem;
+  color: #1a1a14;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  align-self: flex-start;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.contactEmail:hover {
+  opacity: 0.6;
+}
+
+.contactSocials {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactSocials a {
+  font-size: 1.05rem;
+  color: #1a1a14;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contactSocials a:hover {
+  opacity: 0.6;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.formIntro {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field > span {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.field input,
+.field textarea {
+  font: inherit;
+  font-size: 1rem;
+  color: #1a1a14;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(26, 26, 20, 0.35);
+  padding: 8px 2px;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: #1a1a14;
+}
+
+.services {
+  border: 0;
+  margin: 6px 0;
+  padding: 0;
+}
+
+.services legend {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 14px;
+  padding: 0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1a1a14;
+  cursor: pointer;
+}
+
+.submit {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 14px 40px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fdf9d4;
+  background: #1a1a14;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.submit:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+@media (max-width: 860px) {
+  .contactInner {
+    padding: 110px 7vw 70px;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+}

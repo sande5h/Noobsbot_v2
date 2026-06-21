@@ -1,0 +1,200 @@
+.page {
+  /* map the old dark-theme variable names onto the workbench tokens */
+  --text: var(--ink);
+  --muted: var(--ink-soft);
+  --border: var(--hairline);
+  --teal-text: var(--link);
+  --teal-bg: rgba(46, 155, 246, 0.1);
+  --accent: var(--link);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 96px 24px 80px;
+}
+
+/* ── Header ── */
+.header {
+  padding: 0 0 44px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+
+.backLink {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  margin-bottom: 32px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.backLink:hover {
+  color: var(--text);
+  border-color: rgba(15, 27, 97, 0.18);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-text);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Project grid ── */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Project card ── */
+.card {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  background: rgba(15, 27, 97, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(46, 155, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(46, 155, 246, 0.06);
+}
+
+.cardThumb {
+  background: rgba(246, 248, 251, 0.9);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.cardPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6f8fb;
+  padding: 24px;
+}
+
+.cardPlaceholderText {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 13px;
+  color: var(--teal-text);
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.88;
+  transition: opacity 0.2s, transform 0.3s;
+}
+
+.card:hover .cardImg {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.cardBody {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: -2px;
+}
+
+.cardYear {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--teal-text);
+  opacity: 0.8;
+}
+
+.cardTeam {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: var(--teal-bg);
+  color: var(--teal-text);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ── Mobile ── */
+@media (max-width: 680px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .cardThumb {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cardBody {
+    padding: 20px;
+  }
+}

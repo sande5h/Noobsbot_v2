@@ -1,0 +1,74 @@
+:root {
+  --bg: #050505;
+  --fg: #e8fff8;
+  --accent: #00ffff;
+
+  /* ── Workbench design tokens (light theme) ── */
+  /* surfaces */
+  --screen: #ffffff;
+  --panel-sky: #aadcec;
+  --panel-cream: #fdf9d4;
+  --panel-mint: #e3f3ea;
+
+  /* ink */
+  --ink: #0f1b61;
+  --ink-soft: rgba(15, 27, 97, 0.55);
+  --ink-faint: rgba(15, 27, 97, 0.35);
+  --link: #2e9bf6;
+
+  /* lines */
+  --trace: #8f9b95;
+  --hairline: rgba(15, 27, 97, 0.12);
+  --hairline-strong: rgba(15, 27, 97, 0.22);
+
+  /* type */
+  --font-sans: var(--font-space-grotesk), system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo,
+    Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Foreground "screen" floating over the PCB background, inset 20px so the
+   circuit board shows through as a frame all the way around. */
+.screen {
+  position: fixed;
+  inset: 20px;
+  z-index: 1;
+  background: #ffffff;
+  color: #0f1b61;
+  border: none;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
+  overflow: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
