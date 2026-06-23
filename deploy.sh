@@ -8,6 +8,10 @@ echo "Copying static assets into standalone..."
 cp -r .next/static .next/standalone/.next/static
 cp -r public .next/standalone/public
 
+echo "Bundling DB schema + setup scripts..."
+cp -r db .next/standalone/db
+cp -r scripts .next/standalone/scripts
+
 echo "Creating deploy.zip..."
 cd .next/standalone
 zip -r ../../deploy.zip . --exclude "*.DS_Store"
