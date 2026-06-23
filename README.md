@@ -61,3 +61,53 @@ public/
 | "Can't acquire lock" in the DA UI | UI bug — the site is still running. SSH in and `pkill -f "node server.js"`, then restart. |
 | `ENOENT: prerender-manifest.json` | Build is missing/incomplete. Run `bash deploy.sh` locally and re-upload. |
 | `spawn EAGAIN` | You tried to build on the server. Always build locally with `deploy.sh`. |
+
+## Chat (rooms)
+
+Password-gated chat rooms backed by **MariaDB on the same host** (no external service).
+
+- **Admin** (first user): adds users and creates rooms. No public sign-up.
+- **Members**: log in, see all rooms, favourite them, enter a room password to chat.
+- Messages now; file sharing later (`attachments` table is already in the schema).
+- Real-time via short-polling (`/api/rooms/[id]/messages?after=<id>`), so it works under Nginx Unit without WebSockets.
+
+### Environment variables
+
+Set these in **DirectAdmin → Node.js app config** (locally they live in `.env.local`; see `.env.example`):
+
+```
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=...        # the MySQL user you create in DirectAdmin → Databases
+DB_PASSWORD=...
+DB_NAME=...        # the database you create in DirectAdmin → Databases
+DB_POOL_SIZE=5
+AUTH_SECRET=...    # openssl rand -hex 32
+ADMIN_USER=admin   # used once by the seed script
+ADMIN_PASS=...
+```
+
+### Local development
+
+```bash
+# one-time: start MariaDB and create a dev db/user, then:
+npm run init-db     # applies db/schema.sql
+npm run seed:admin  # creates the first admin from ADMIN_USER / ADMIN_PASS
+npm run dev
+```
+
+Log in at `http://localhost:3000/login`.
+
+### On DirectAdmin (one-time DB setup)
+
+1. **Databases** → create a database + user, note the credentials.
+2. Put those + `AUTH_SECRET` + `ADMIN_*` into the Node.js app's env vars.
+3. Apply the schema: either import `db/schema.sql` via **phpMyAdmin**, or in **Terminal**:
+   ```bash
+   node --env-file=.env.production scripts/init-db.mjs
+   node --env-file=.env.production scripts/seed-admin.mjs
+   ```
+   (Create `.env.production` with the same keys, or export the vars inline.)
+4. Restart the Node.js app.
+
+`deploy.sh` bundles `node_modules` into the standalone output, so `mysql2`, `bcryptjs`, and `jose` ship with the build — no `npm install` on the server. All three are pure-JS (no native compile).

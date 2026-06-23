@@ -39,6 +39,7 @@ export default function Nav() {
         </a>
         <span className={styles.sep} aria-hidden="true" />
         <button
+          id="menu-toggle"
           className={styles.menuBtn}
           onClick={() => {
             setContact(false);

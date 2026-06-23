@@ -14,12 +14,46 @@
   letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--ink);
+  animation: statusIn 0.5s ease;
+}
+
+@keyframes statusIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title {
+    animation: none;
+  }
 }
 
 .sub {
-  margin-top: 14px;
+  margin-top: 20px;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
   letter-spacing: 0.04em;
   color: var(--ink-soft);
+  background: none;
+  border: 0;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sub:hover {
+  color: var(--link);
+  transform: translateY(-1px);
+}
+
+.sub:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 4px;
+  border-radius: 6px;
 }

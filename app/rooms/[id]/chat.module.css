@@ -1,0 +1,117 @@
+.wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+.back {
+  display: none; /* desktop: sidebar handles navigation */
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.back:hover {
+  background: var(--panel-sky);
+}
+.name {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.feed {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 18px;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 80%;
+}
+/* own messages: right side, avatar on the right, accent bubble */
+.mine {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.bubble {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 13px;
+  border-radius: 14px;
+  background: var(--panel-mint);
+  color: var(--ink);
+  word-break: break-word;
+}
+.mine .bubble {
+  background: var(--link);
+  color: #fff;
+}
+.author {
+  font-size: 1.05rem;        /* a little bigger than the message text */
+  font-weight: 700;          /* bold */
+  line-height: 1.2;
+  color: inherit;
+  margin-bottom: 1px;
+}
+.mine .author {
+  text-align: right;
+}
+.text {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+
+.composer {
+  display: flex;
+  gap: 10px;
+  padding: 14px 18px 18px;
+  border-top: 1px solid var(--hairline);
+}
+.composer input {
+  flex: 1;
+  font: inherit;
+  font-size: 1rem;
+  padding: 11px 14px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 22px;
+  color: var(--ink);
+}
+.composer input:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 1px;
+}
+.composer button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--link);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .back {
+    display: inline-flex;
+  }
+}
