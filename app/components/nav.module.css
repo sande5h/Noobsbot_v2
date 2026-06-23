@@ -167,8 +167,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 150px 55px 80px 65px;
+  justify-content: flex-start;
+  padding: 110px 55px 80px 65px;
   overflow: auto;
 }
 
@@ -208,15 +208,19 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  max-width: 720px;
 }
 
 .primary li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
   margin: 4px 0;
 }
 
 .primary a {
   display: inline-block;
-  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
   line-height: 1.18;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -231,10 +235,15 @@
 }
 
 .summary {
-  display: block;
-  margin-top: 2px;
+  flex: 0 0 240px;
+  margin-left: auto;
   font-size: 0.9rem;
   color: rgba(15, 27, 97, 0.5);
+  transition: color 0.2s ease;
+}
+
+.primary li:hover .summary {
+  color: #2e9bf6;
 }
 
 /* ---- contact / quote-request flyout ---- */

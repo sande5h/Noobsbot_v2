@@ -9,8 +9,6 @@ const LINKS = [
   { label: "Tools", href: "/tools", desc: "Electronics & PCB calculator suite." },
   { label: "Land Calc", href: "/land", desc: "Nepali land-unit converter." },
   { label: "Projects", href: "/projects", desc: "Hardware & firmware we've built." },
-  { label: "Profiles", href: "#", desc: "Meet the team." },
-  { label: "About", href: "#", desc: "A little about Noobsbot." },
 ];
 
 const SERVICES = [
