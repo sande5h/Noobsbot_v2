@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./admin.module.css";
 
 export default function AdminClient({ meId }) {
+  const router = useRouter();
   const [users, setUsers] = useState([]);
   const [rooms, setRooms] = useState([]);
 
@@ -51,6 +53,12 @@ export default function AdminClient({ meId }) {
     }
   }
 
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/login");
+    router.refresh();
+  }
+
   async function setRoomDeleted(id, deleted) {
     await fetch(`/api/rooms/${id}`, { method: deleted ? "DELETE" : "PATCH" });
     loadRooms();
@@ -80,15 +88,28 @@ export default function AdminClient({ meId }) {
   }
 
   return (
-    <div className={styles.wrap}>
-      <header className={styles.top}>
-        <h1 className={styles.heading}>Admin</h1>
-        <a className={styles.back} href="/rooms">
-          ← Rooms
-        </a>
+    <div className={styles.app}>
+      <header className={styles.topbar}>
+        <span className={styles.brand}>
+          Noobs<span className={styles.brandAccent}>Bot</span> Chat
+        </span>
+        <div className={styles.topRight}>
+          <button className={styles.logout} onClick={logout}>
+            Log out
+          </button>
+        </div>
       </header>
 
-      <div className={styles.grid}>
+      <div className={styles.content}>
+        <div className={styles.wrap}>
+          <button
+            className={styles.back}
+            onClick={() => router.push("/rooms")}
+            aria-label="Back to chat"
+          >
+            Back
+          </button>
+          <div className={styles.grid}>
         <section className={styles.panel}>
           <h2 className={styles.h2}>Add user</h2>
           <form onSubmit={addUser} className={styles.form}>
@@ -178,7 +199,9 @@ export default function AdminClient({ meId }) {
               </li>
             ))}
           </ul>
-        </section>
+          </section>
+          </div>
+        </div>
       </div>
     </div>
   );

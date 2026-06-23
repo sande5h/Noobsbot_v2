@@ -126,9 +126,16 @@ export default function RoomsShell({ user, children }) {
   return (
     <div className={styles.app}>
       <header className={styles.topbar}>
-        <span className={styles.brand}>
-          Noobs<span className={styles.brandAccent}>Bot</span> Chat
-        </span>
+        <div className={styles.topLeft}>
+          <span className={styles.brand}>
+            Noobs<span className={styles.brandAccent}>Bot</span> Chat
+          </span>
+          {user.isAdmin && (
+            <a className={styles.editBtn} href="/admin">
+              Edit
+            </a>
+          )}
+        </div>
         <div className={styles.topRight}>
           <label className={styles.avatarBtn} title="Change profile picture">
             <Avatar src={meAvatar} name={user.username} size={34} />
@@ -141,13 +148,11 @@ export default function RoomsShell({ user, children }) {
             />
           </label>
           <span className={styles.who}>@{user.username}</span>
-          {user.isAdmin && (
-            <a className={styles.adminLink} href="/admin">
-              Admin
-            </a>
-          )}
           <button className={styles.logout} onClick={logout}>
             Log out
+          </button>
+          <button className={styles.exitBtn} onClick={() => router.push("/")}>
+            Exit
           </button>
         </div>
       </header>

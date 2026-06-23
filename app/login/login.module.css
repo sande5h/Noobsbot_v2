@@ -1,9 +1,13 @@
+/* full-screen frame so the marketing nav/PCB frame stays hidden */
 .wrap {
-  min-height: calc(100vh - 40px);
+  position: fixed;
+  inset: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  background: #fff;
 }
 
 .card {
@@ -69,4 +73,20 @@
 .submit:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+.exit {
+  font: inherit;
+  font-weight: 600;
+  padding: 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.exit:hover {
+  border-color: var(--link);
+  color: var(--link);
 }

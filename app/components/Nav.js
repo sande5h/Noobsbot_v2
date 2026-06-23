@@ -1,7 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import LottieIcon from "./LottieIcon";
+import buildAnim from "./lottie/build.json";
+import roomsAnim from "./lottie/rooms.json";
 import styles from "./nav.module.css";
 
 const LINKS = [
@@ -60,34 +62,41 @@ export default function Nav() {
         </button>
       </header>
 
-      {/* "Build" trigger on the top-right — opens the contact flyout */}
-      <button
-        className={styles.tagline}
-        onClick={() => {
-          setOpen(false);
-          setContact((v) => !v);
-        }}
-        aria-expanded={contact}
-        aria-controls="contact-panel"
-        aria-label={contact ? "Close contact form" : "Open contact form"}
-      >
-        <Image
-          src="/build-together.png"
-          alt=""
-          width={50}
-          height={50}
-          className={styles.taglineIcon}
-          aria-hidden="true"
-        />
-        <span className={`${styles.menuMask} ${contact ? styles.open : ""}`}>
-          <span className={`${styles.label} ${styles.labelMenu}`} aria-hidden="true">
-            Build
+      {/* top-right actions: Build (contact flyout) + Rooms (chat) */}
+      <div className={styles.topRight}>
+        <button
+          className={styles.tagline}
+          onClick={() => {
+            setOpen(false);
+            setContact((v) => !v);
+          }}
+          aria-expanded={contact}
+          aria-controls="contact-panel"
+          aria-label={contact ? "Close contact form" : "Open contact form"}
+        >
+          <LottieIcon data={buildAnim} size={46} className={styles.taglineIcon} />
+          <span className={`${styles.menuMask} ${contact ? styles.open : ""}`}>
+            <span className={`${styles.label} ${styles.labelMenu}`} aria-hidden="true">
+              Build
+            </span>
+            <span className={`${styles.label} ${styles.labelClose}`} aria-hidden="true">
+              Close
+            </span>
           </span>
-          <span className={`${styles.label} ${styles.labelClose}`} aria-hidden="true">
-            Close
+        </button>
+
+        <a className={styles.tagline} href="/rooms" aria-label="Open chat rooms">
+          <LottieIcon data={roomsAnim} size={46} className={styles.taglineIcon} />
+          <span className={styles.menuMask}>
+            <span className={`${styles.label} ${styles.labelMenu}`} aria-hidden="true">
+              Rooms
+            </span>
+            <span className={`${styles.label} ${styles.labelClose}`} aria-hidden="true">
+              Rooms
+            </span>
           </span>
-        </span>
-      </button>
+        </a>
+      </div>
 
       {/* primary navigation flyout */}
       <div

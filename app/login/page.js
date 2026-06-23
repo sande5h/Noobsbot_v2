@@ -60,6 +60,13 @@ export default function LoginPage() {
         <button className={styles.submit} type="submit" disabled={busy}>
           {busy ? "Signing in…" : "Sign in"}
         </button>
+        <button
+          className={styles.exit}
+          type="button"
+          onClick={() => router.push("/")}
+        >
+          Exit
+        </button>
       </form>
     </div>
   );
