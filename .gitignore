@@ -12,7 +12,6 @@ deploy.zip
 # env files
 .env
 .env*.local
-.env.production
 
 # logs
 *.log

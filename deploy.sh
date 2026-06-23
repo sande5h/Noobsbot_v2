@@ -12,9 +12,6 @@ echo "Bundling DB schema + setup scripts..."
 cp -r db .next/standalone/db
 cp -r scripts .next/standalone/scripts
 
-echo "Bundling startup wrapper..."
-cp start.mjs .next/standalone/start.mjs
-
 echo "Creating deploy.zip..."
 cd .next/standalone
 zip -r ../../deploy.zip . --exclude "*.DS_Store"
